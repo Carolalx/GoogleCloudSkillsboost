@@ -151,5 +151,4 @@ echo "${MAGENTA}${BOLD}   CLOUD SQL & BIGQUERY LAB COMPLETO!!!     ${RESET}"
 echo "${MAGENTA}${BOLD}============================================${RESET}"
 echo
 echo "${GREEN}${BOLD}Parabéns por conluir este LAB!${RESET}"
-e
-echo "${YELLOW}https://www.youtube.com/@drabhishek.5460/videos${RESET}"
+echo
