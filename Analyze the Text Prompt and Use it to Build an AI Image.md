@@ -1,4 +1,16 @@
+# Analyze the Text Prompt and Use it to Build an AI Image
 
+**Passo 1 de 2**   
+- Clique em New file, copie o código abaixo e cole no espaço disponível para a criação.   
+- Altere "YOUR PROJECT_ID" e a região em (API endpoint for Imagen 3.0 - região conforme informado no Lab) o para os dados informados no LAB. e
+ tecle ENTER aguarde a execução acampanhando pelo terminal. Quando finalizar, clique em File -> Salvar (Save)...
+
+ **Passo 2 de 2**
+ - Quando a janela para salvar for aberta copie no nome do projeto requisitado no LAB, salve.   
+
+ ...Aguarde uns instantes e verifique seu progresso.
+
+```bash
 import google.auth
 import google.auth.transport.requests
 from google.auth.transport.requests import AuthorizedSession
@@ -16,7 +28,7 @@ def generate_image(prompt):
     """
     
     # Set your project ID here
-    PROJECT_ID = "YOUR_PROJECT_ID" #Conforme informado no Lab
+    PROJECT_ID = "YOUR_PROJECT_ID"
     
     # Authenticate and get credentials
     credentials, _ = google.auth.default(scopes=['https://www.googleapis.com/auth/cloud-platform'])
@@ -111,3 +123,4 @@ if __name__ == "__main__":
         print("🎉 Image generation completeed successfully!")
     else:
         print("❌ Image generation failed")
+```
