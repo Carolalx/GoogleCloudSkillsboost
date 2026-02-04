@@ -1,4 +1,4 @@
-# APIs Explorer: Cloud SQL
+# APIs Explorer: Cloud SQL - GSP423
 
 1 - Clique em Start Lab   
 2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em Agree and Continue   
