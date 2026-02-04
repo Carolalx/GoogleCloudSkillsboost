@@ -1,7 +1,5 @@
 # GoogleCloudSkillsboost   
 
-# Analyze the Text Prompt and Use it to Build an AI Image
-
 # Google Arcade – LABs 🎮☁️
 
 Este repositório contém os **LABs realizados durante minha participação no Google Arcade**, uma iniciativa do Google com foco em aprendizado prático com tecnologias de nuvem, dados, IA e desenvolvimento.
