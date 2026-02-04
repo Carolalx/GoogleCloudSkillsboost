@@ -20,8 +20,6 @@ echo
 echo "${CYAN}${BOLD}============================================${RESET}"
 echo "${CYAN}${BOLD}   CAROL'S LAB -- SEJAM TODOS BEM VINDOS!!  ${RESET}"
 echo "${CYAN}${BOLD}============================================${RESET}"
-echo "${BLUE}YouTube Channel: https://www.youtube.com/@drabhishek.5460${RESET}"
-echo "${CYAN}Video Tutorials: https://www.youtube.com/@drabhishek.5460/videos${RESET}"
 echo
 
 # Region Configuration
