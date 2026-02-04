@@ -25,21 +25,6 @@ RESET=$(tput sgr0)
 # Clear screen
 clear
 
-# Banner function
-function show_banner() {
-    echo "${BLUE}${BOLD}╔══════════════════════════════════════════════════╗${RESET}"
-    echo "${BLUE}${BOLD}║   WELCOME TO  MY CHANNEL DO LIKE THE VIDEO     ║${RESET}"
-    echo "${BLUE}${BOLD}║            &  SUBSCRIBE THE CHANNEL                  ║${RESET}"
-    echo "${BLUE}${BOLD}╚══════════════════════════════════════════════════╝${RESET}"
-    echo
-    echo "${GREEN}For more cloud tutorials, subscribe to:${RESET}"
-    echo "${CYAN}${BOLD}https://www.youtube.com/@drabhishek.5460/videos${RESET}"
-    echo "${YELLOW}──────────────────────────────────────────────${RESET}"
-    echo
-}
-
-show_banner
-
 # Start execution message
 echo "${YELLOW}${BOLD}Starting ${GREEN}${BOLD}Video Intelligence API Execution${RESET}"
 echo
