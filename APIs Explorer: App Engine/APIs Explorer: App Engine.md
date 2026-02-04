@@ -16,9 +16,9 @@ sudo chmod +x carolalx.sh
 `gcloud auth login`   
 
 6 - digite: `Y`   
-7 - Acesse o link gerado pelo no Shell, selecione o usuário, clique em Allow   
+7 - Acesse o link gerado no Shell, selecione o usuário, clique em Allow   
 8 - Finalmente clique em `COPY` e cole no terminal (abaixo do link gerado)    
-9 - Verifiquue seu Progresso! 
+9 - Verifique seu Progresso! (pode levar alguns segundos)
 
 
 ### Congratulations !!!!
