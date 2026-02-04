@@ -8,7 +8,7 @@
 6 - Copie o código abaixo e cole no terminal e tecle ENTER
 
 ```bash
-curl -LO https://github.com/Carolalx/GoogleCloudSkillsboost/blob/main/Video%20Intelligence%3A%20Qwik%20Start/carolalx.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Video%20Intelligence%3A%20Qwik%20Start/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
