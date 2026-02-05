@@ -23,9 +23,9 @@ REVERSE_TEXT=$'\033[7m'
 
 clear
 # Welcome message
-echo "${ORANGE_TEXT}${BOLD_TEXT}===========================================${RESET_FORMAT}"
-echo "${ORANGE_TEXT}${BOLD_TEXT}          Welcome to Dr Carol's LAB        ${RESET_FORMAT}"
-echo "${ORANGE_TEXT}${BOLD_TEXT}===========================================${RESET_FORMAT}"
+echo "${ORANGE_TEXT}${BOLD_TEXT}========================================${RESET_FORMAT}"
+echo "${ORANGE_TEXT}${BOLD_TEXT}          Welcome to Carol's LAB        ${RESET_FORMAT}"
+echo "${ORANGE_TEXT}${BOLD_TEXT}========================================${RESET_FORMAT}"
 echo
 
 # ========================= AUTH CHECK =========================
