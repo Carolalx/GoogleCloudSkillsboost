@@ -12,6 +12,9 @@ export ZONE_2=
 
 ```
 
+- Ficará mais ou menos assim:
+- `export ZONE_2=us-central1-a`
+
 ```bash
 curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Creating%20Cross-region%20Load%20Balancing/carolalx.sh
 
