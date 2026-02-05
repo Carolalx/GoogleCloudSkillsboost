@@ -15,7 +15,7 @@ clear
 
 echo
 echo "${CYAN_TEXT}${BOLD_TEXT}============================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}🚀         WELCOME TO CAROL'S LAB         🚀${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}🚀          WELCOME TO CAROL'S LAB        🚀${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}============================================${RESET_FORMAT}"
 echo
 
@@ -351,4 +351,3 @@ gcloud logging read "resource.type='k8s_cluster' AND protoPayload.request.metada
 echo "${RED_TEXT}${BOLD_TEXT}🧹 Cleaning up resources...${RESET_FORMAT}"
 ./delete.sh -c my-cluster-1
 echo "Y" | gcloud container clusters delete my-cluster-1
-echo
