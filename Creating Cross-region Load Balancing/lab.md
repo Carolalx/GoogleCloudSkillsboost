@@ -13,7 +13,7 @@ export ZONE_2=
 ```
 
 ```bash
-curl -LO raw.githubusercontent.com/imharshtiwari/2-Minutes-GCP-Lab-Solutions/refs/heads/main/Creating%20Cross-region%20Load%20Balancing/gsp157.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Creating%20Cross-region%20Load%20Balancing/carolalx.sh
 
 sudo chmod +x carolalx.sh
 
