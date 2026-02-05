@@ -23,4 +23,7 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
+5 - Repita o processo para a `zone 2`  
+6 - Verifique seu progresso...   
+
 **Parabéns! Você concluiu este LAB.**
