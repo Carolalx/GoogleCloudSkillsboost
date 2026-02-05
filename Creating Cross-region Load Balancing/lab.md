@@ -15,9 +15,9 @@ export ZONE_2=
 ```bash
 curl -LO raw.githubusercontent.com/imharshtiwari/2-Minutes-GCP-Lab-Solutions/refs/heads/main/Creating%20Cross-region%20Load%20Balancing/gsp157.sh
 
-sudo chmod +x gsp157.sh
+sudo chmod +x carolalx.sh
 
-./gsp157.sh
+./carolalx.sh
 ```
 
 **Parabéns! Você concluiu este LAB.**
