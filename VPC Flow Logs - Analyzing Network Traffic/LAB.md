@@ -10,11 +10,11 @@ curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/
 sudo chmod +x carolalx.sh 
 ./carolalx.sh
 ```
-
+**Quando aparecer `Waiting 100 seconds for network propagation` AGUARDE...ainda esta em execução   
 5 - Antes de digitar `Y` acesse o **1º** link apresentado no Shell   
 6 - em **Firewall Rules detais** clique em `Edit`   
 7 - em **Logs** selecione `On`   
-8 - Clique em `Save`   
+8 - Clique em `Save`, espere salvar      
 9 - Retorne ao Shell e clique no **2º** link apresentado no Shell   
 10 - No canto superior direito, clique em `Run Query`   
 11 - Clique em `Actions` > `Create sink`   
@@ -22,8 +22,8 @@ sudo chmod +x carolalx.sh
 13 - em **Select sink service** selecione `BigQuery dataset`   
 14 - em **BigQuery dataser** selecione `bq_vpcflows` > `Next` > `Next` > `Create sink`   
 15 - Aguarde a mensagem de confirmação   
-16 - Retorne ao Shell, Digite `Y` e pressione `ENTER`   
-
+16 - Retorne ao Shell, Digite `Y` e pressione `ENTER`     
+17 - Verifique seu progresso    
 
 **Sink Name: vpc-flows**
 ```
