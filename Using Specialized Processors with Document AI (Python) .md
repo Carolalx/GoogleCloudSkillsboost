@@ -1,0 +1,134 @@
+# Using Specialized Processors with Document AI (Python) 
+
+1 - Clique em Start Lab   
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`      
+3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
+4 - Copie os códigos abaixo (um de cada vez), cole no terminal e pressione `ENTER`      
+
+```
+gcloud services enable documentai.googleapis.com
+```
+
+```
+pip3 install --upgrade pandas
+```
+
+```
+pip3 install --upgrade google-cloud-documentai
+```
+
+5 - Verifique o seu progresso de Task 1.
+6 - Siga os passos da Task 2 e verifique seu progresso;   
+7 - Para a Task 3. Volte ao Cloud Shell `>_` e digite `nano extraction.py`
+8 - Copie o código python abaixo e cole em um bloco de notas, altere:
+
+```bash
+import pandas as pd
+from google.cloud import documentai_v1 as documentai
+
+
+def online_process(
+    project_id: str,
+    location: str,
+    processor_id: str,
+    file_path: str,
+    mime_type: str,
+) -> documentai.Document:
+    """
+    Processes a document using the Document AI Online Processing API.
+    """
+
+    opts = {"api_endpoint": f"{location}-documentai.googleapis.com"}
+
+    # Instantiates a client
+    documentai_client = documentai.DocumentProcessorServiceClient(client_options=opts)
+
+    # The full resource name of the processor, e.g.:
+    # projects/project-id/locations/location/processor/processor-id
+    # You must create new processors in the Cloud Console first
+    resource_name = documentai_client.processor_path(project_id, location, processor_id)
+
+    # Read the file into memory
+    with open(file_path, "rb") as file:
+        file_content = file.read()
+
+    # Load Binary Data into Document AI RawDocument Object
+    raw_document = documentai.RawDocument(content=file_content, mime_type=mime_type)
+
+    # Configure the process request
+    request = documentai.ProcessRequest(name=resource_name, raw_document=raw_document)
+
+    # Use the Document AI client to process the sample form
+    result = documentai_client.process_document(request=request)
+
+    return result.document
+
+
+PROJECT_ID = "SEU PROJECT ID" # seu ID de projeto
+LOCATION = "us" # "us" ou "eu"
+PROCESSOR_ID = "ID GERADO EM TASK 2"  # Create processor in Cloud Console
+
+# The local file in your current working directory
+FILE_PATH = "google_invoice.pdf"
+# Refer to https://cloud.google.com/document-ai/docs/processors-list
+# for supported file types
+MIME_TYPE = "application/pdf"
+
+document = online_process(
+    project_id=PROJECT_ID,
+    location=LOCATION,
+    processor_id=PROCESSOR_ID,
+    file_path=FILE_PATH,
+    mime_type=MIME_TYPE,
+)
+
+types = []
+raw_values = []
+normalized_values = []
+confidence = []
+
+# Grab each key/value pair and their corresponding confidence scores.
+for entity in document.entities:
+    types.append(entity.type_)
+    raw_values.append(entity.mention_text)
+    normalized_values.append(entity.normalized_value.text)
+    confidence.append(f"{entity.confidence:.0%}")
+
+    # Get Properties (Sub-Entities) with confidence scores
+    for prop in entity.properties:
+        types.append(prop.type_)
+        raw_values.append(prop.mention_text)
+        normalized_values.append(prop.normalized_value.text)
+        confidence.append(f"{prop.confidence:.0%}")
+
+# Create a Pandas Dataframe to print the values in tabular format.
+df = pd.DataFrame(
+    {
+        "Type": types,
+        "Raw Value": raw_values,
+        "Normalized Value": normalized_values,
+        "Confidence": confidence,
+    }
+)
+
+print(df)
+```
+
+altere em seu bloco:   
+**PROJECT_ID = "SEU PROJECT ID" # seu ID de projeto   
+LOCATION = "us" # "us" ou "eu"   
+PROCESSOR_ID = "ID GERADO EM TASK 2"  # Create processor in Cloud Console**   
+
+9 - Copie o código alterado, cole na janela nano e pressione `CTRL`+`X` > `Y`   
+10 - Com o nano fechado e salvo, rode o script `python3 extraction.py`   
+11 - Por ultimo rode o script:   
+```
+# Create a bucket
+export PROJECT_ID=$(gcloud config get-value project)
+gsutil mb gs://$PROJECT_ID-docai
+
+# Create and upload the file
+python3 extraction.py > docai_outputs.txt
+gsutil cp docai_outputs.txt gs://$PROJECT_ID-docai
+```
+12 - Verifique seu progresso e FIM.
