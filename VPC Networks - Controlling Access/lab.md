@@ -7,8 +7,8 @@
 
 ```
 curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/VPC%20Networks%20-%20Controlling%20Access/carolalx.sh
-sudo chmod +x TechCode.sh 
-./TechCode.sh
+sudo chmod +x carolalx.sh
+./carolalx.sh
 ```
 
 5 - Copie a `ZONE` informada em seu lab (terceira linha da tabela em Task 1.3.)   
