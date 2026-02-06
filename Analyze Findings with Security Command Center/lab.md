@@ -11,13 +11,13 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 
 ```
-
+⚠️ ⚠️ 
 5 - Antes de digitar `Y`, clique no link apresentado no terminal   
    - Em **Continuous Export Name** digite: `export-findings-pubsub-topic`;       
    - Em **Export To**, clique em **Select**, selecione o usuário apresentado;   
    - Em **Select a cloud Pub/Sub Topic**, selecione o usuário novamente;
    - Pressione `Save`;
-   - Após ver **Active** em status, retorne ao terminal, digite `Y` e pressione `Enter`.
+   - Após ver **Active ✅** em status, retorne ao terminal, digite `Y` e pressione `Enter`.
 
 6 - Quanto no terminal aparecer `No findings yet. Wainting for 100 seconds`, pressione `CTRL`+ `C`   
     chame novamente: `./carolalx.sh`   
