@@ -22,7 +22,7 @@ pip3 install --upgrade google-cloud-documentai
 7 - Para a Task 3. Volte ao Cloud Shell `>_` e digite `nano extraction.py`
 8 - Copie o código python abaixo e cole em um bloco de notas, altere:
 
-```bash
+```python
 import pandas as pd
 from google.cloud import documentai_v1 as documentai
 
