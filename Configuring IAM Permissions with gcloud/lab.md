@@ -1,10 +1,10 @@
 #     Configuring IAM Permissions with gcloud - GSP647
 
-1 - Clique em Start Lab    
-2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em Agree and Continue   
-3 - Clique para abrir o Cloud Shell >_ (ao lado do ícone do Gemini)   
+1 - Clique em Start Lab   
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
+3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
 4 - Copie o código abaixo e cole no terminal   
- 
+
 ```bash
 gcloud compute ssh centos-clean --zone=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-zone])") --quiet
 ```
@@ -16,4 +16,7 @@ sudo chmod +x carolalx.sh
 ```
 
 5 - Siga os passos solicitados pelo terminal   
-6 - Verifique seu progresso
+6 - Verifique seu progresso   
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
