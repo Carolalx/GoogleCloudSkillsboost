@@ -131,4 +131,6 @@ gsutil mb gs://$PROJECT_ID-docai
 python3 extraction.py > docai_outputs.txt
 gsutil cp docai_outputs.txt gs://$PROJECT_ID-docai
 ```
-12 - Verifique seu progresso e FIM.
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
