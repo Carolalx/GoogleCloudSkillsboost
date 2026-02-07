@@ -1,4 +1,3 @@
-
 # Generate AI Images and Summarize them Using Gemini and Python
 
 
