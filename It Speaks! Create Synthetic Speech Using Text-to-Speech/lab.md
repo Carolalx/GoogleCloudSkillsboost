@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO https://raw.githubusercontent.com/Itsabhishek7py/GoogleCloudSkillsboost/refs/heads/main/It%20Speaks%20Create%20Synthetic%20Speech%20Using%20Text%20to%20Speech/abhishek.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/It%20Speaks!%20Create%20Synthetic%20Speech%20Using%20Text-to-Speech/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
