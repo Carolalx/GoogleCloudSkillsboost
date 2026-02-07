@@ -30,3 +30,7 @@ sudo chmod +x carolalx.sh
 export ZONE=$(gcloud compute instances list --filter="name=centos-clean" --format="value(zone)")
 gcloud compute ssh centos-clean --zone=$ZONE --quiet
 ```
+
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
