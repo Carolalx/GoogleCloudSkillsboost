@@ -2,15 +2,9 @@
 
 **Passo 1 de 2**   
 - Clique em New file, copie o código abaixo e cole no espaço disponível para a criação.   
-- Altere "YOUR PROJECT_ID" e a região em (API endpoint for Imagen 3.0 - região conforme informado no Lab) o para os dados informados no LAB. e
- tecle ENTER aguarde a execução acampanhando pelo terminal. Quando finalizar, clique em File -> Salvar (Save)...
+- Altere `YOUR PROJECT_ID`" e a `REGION` em (API endpoint for Imagen 3.0 - região conforme informado no Lab) o para os dados informados no LAB. e
 
- **Passo 2 de 2**
- - Quando a janela para salvar for aberta copie no nome do projeto requisitado no LAB, salve.   
-
- ...Aguarde uns instantes e verifique seu progresso.
-
-```bash
+```python
 import google.auth
 import google.auth.transport.requests
 from google.auth.transport.requests import AuthorizedSession
@@ -124,3 +118,14 @@ if __name__ == "__main__":
     else:
         print("❌ Image generation failed")
 ```
+
+ tecle ENTER aguarde a execução acampanhando pelo terminal. Quando finalizar, clique em File -> Salvar (Save)...   
+
+ **Passo 2 de 2**
+ - Quando a janela para salvar for aberta copie o nome do projeto requisitado no LAB, salve.   
+
+ ...Aguarde uns instantes e verifique seu progresso.
+
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
