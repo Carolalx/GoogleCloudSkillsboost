@@ -23,9 +23,6 @@ echo "${HEADER_COLOR}${BOLD_TEXT}┏━━━━━━━━━━━━━━�
 echo "${TITLE_COLOR}${BOLD_TEXT} 🎓 CAROL'S LAB Introduction to APIs in Google Cloud ${RESET_FORMAT}"
 echo "${HEADER_COLOR}${BOLD_TEXT}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${RESET_FORMAT}"
 echo
-echo "${TEXT_COLOR}This lab demonstrates advanced Cloud Storage API operations${RESET_FORMAT}"
-echo "${TEXT_COLOR}including bucket creation and file management in Google Cloud.${RESET_FORMAT}"
-echo
 
 # Function to display messages with formatting
 print_message() {
@@ -78,10 +75,10 @@ echo
 
 # Step 1: Set the region for the project
 set_region() {
-    print_message "$ACTION_COLOR" "🌍" "TASK 1: Setting the compute region..."
+    print_message "$ACTION_COLOR" "🌍" "TASK 1: Configurando Region..."
     
     # Get region from user or use default
-    read -p "${PROMPT_COLOR}${BOLD_TEXT}Enter REGION [us-central1]: ${RESET_FORMAT}" REGION
+    read -p "${PROMPT_COLOR}${BOLD_TEXT}Informe REGION..Ex: [us-central1]: ${RESET_FORMAT}" REGION
     REGION=${REGION:-us-central1}
     
     gcloud config set compute/region $REGION
@@ -93,7 +90,7 @@ set_region() {
 
 # Step 2: Creating JSON File
 create_json_file() {
-    print_message "$ACTION_COLOR" "📄" "TASK 2: Creating values.json configuration file..."
+    print_message "$ACTION_COLOR" "📄" "TASK 2: Criando values.json configuration file..."
     
     # Get Project ID
     PROJECT_ID=$(gcloud config get-value project)
@@ -118,7 +115,7 @@ EOL
 
 # Step 3: Ensure API is enabled
 enable_api() {
-    print_message "$ACTION_COLOR" "⚙️" "TASK 3: Enabling Cloud Storage API..."
+    print_message "$ACTION_COLOR" "⚙️" "TASK 3: Habilitando Cloud Storage API..."
     
     gcloud services enable storage-api.googleapis.com
     handle_error $? "Failed to enable Cloud Storage API"
@@ -129,19 +126,19 @@ enable_api() {
 
 # Step 4: Manual OAuth token generation instructions
 oauth_token_instructions() {
-    print_message "$ACTION_COLOR" "🔑" "TASK 4: OAuth Token Generation (Manual Step)"
+    print_message "$ACTION_COLOR" "🔑" "TASK 4: OAuth Token Generation (Passos Manuais)"
     echo
-    echo "${TEXT_COLOR}Please follow these steps to generate an OAuth token:${RESET_FORMAT}"
+    echo "${TEXT_COLOR}Siga estes passos paragerar um OAuth token:${RESET_FORMAT}"
     echo
-    echo "${PROMPT_COLOR}1. Open the OAuth 2.0 playground: ${LINK_COLOR}https://developers.google.com/oauthplayground/${RESET_FORMAT}"
-    echo "${PROMPT_COLOR}2. Select ${BOLD_TEXT}Cloud Storage API V1${RESET_FORMAT}"
-    echo "${PROMPT_COLOR}3. Choose the scope: ${BOLD_TEXT}https://www.googleapis.com/auth/devstorage.full_control${RESET_FORMAT}"
-    echo "${PROMPT_COLOR}4. Click ${BOLD_TEXT}Authorize APIs${RESET_FORMAT} and sign in"
-    echo "${PROMPT_COLOR}5. Exchange authorization code for tokens"
-    echo "${PROMPT_COLOR}6. Copy the ${BOLD_TEXT}Access token${RESET_FORMAT}"
+    echo "${PROMPT_COLOR}1. Abra o OAuth 2.0 playground: ${LINK_COLOR}https://developers.google.com/oauthplayground/${RESET_FORMAT}"
+    echo "${PROMPT_COLOR}2. Selecione ${BOLD_TEXT}Cloud Storage API V1${RESET_FORMAT}"
+    echo "${PROMPT_COLOR}3. Escolha o escopo: ${BOLD_TEXT}https://www.googleapis.com/auth/devstorage.full_control${RESET_FORMAT}"
+    echo "${PROMPT_COLOR}4. Clique ${BOLD_TEXT}Authorize APIs${RESET_FORMAT} and sign in"
+    echo "${PROMPT_COLOR}5. Código de autorização de troca de tokens"
+    echo "${PROMPT_COLOR}6. Copie o ${BOLD_TEXT}Access token${RESET_FORMAT}"
     echo
     
-    read -p "${PROMPT_COLOR}${BOLD_TEXT}Please paste your OAuth2 token here: ${RESET_FORMAT}" OAUTH2_TOKEN
+    read -p "${PROMPT_COLOR}${BOLD_TEXT}Cole seu OAuth2 token aqui: ${RESET_FORMAT}" OAUTH2_TOKEN
     
     if [ -z "$OAUTH2_TOKEN" ]; then
         print_error "OAuth2 token is required to proceed"
@@ -155,7 +152,7 @@ oauth_token_instructions() {
 
 # Step 5: Create a bucket using the API
 create_bucket() {
-    print_message "$ACTION_COLOR" "🛠️" "TASK 5: Creating Cloud Storage bucket via API..."
+    print_message "$ACTION_COLOR" "🛠️" "TASK 5: Criando o Cloud Storage bucket via API..."
     
     # Verify we have the required variables
     if [ -z "$PROJECT_ID" ] || [ -z "$OAUTH2_TOKEN" ]; then
@@ -164,7 +161,7 @@ create_bucket() {
     fi
     
     # Make the API call
-    print_message "$TEXT_COLOR" "🔧" "Initiating bucket creation API call..."
+    print_message "$TEXT_COLOR" "🔧" "Iniciando criação bucket API..."
     RESPONSE=$(curl -s -X POST --data-binary @values.json \
         -H "Authorization: Bearer $OAUTH2_TOKEN" \
         -H "Content-Type: application/json" \
