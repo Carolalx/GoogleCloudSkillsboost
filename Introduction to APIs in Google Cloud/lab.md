@@ -6,7 +6,7 @@
 4 - Copie o código abaixo e cole no terminal
 
 ```
-curl -LO 
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Introduction%20to%20APIs%20in%20Google%20Cloud/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
