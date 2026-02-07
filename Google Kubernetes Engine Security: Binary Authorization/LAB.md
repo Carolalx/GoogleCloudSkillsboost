@@ -3,9 +3,10 @@
 ***⚠️  Este LAB é um pouco mais complexo, leia tudo antes de exectuar!***   
 
 1 - Clique em Start Lab   
-2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em Agree and Continue   
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`    
 3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
 4 - Digite no terminal: (ou copie e cole)   
+
 ```bash
 gcloud config set project VALUE
 ```
@@ -39,4 +40,6 @@ sudo chmod +x carolalx.sh
 12 - Volte ao terminal, digite `Y` e aguarde.   
 13 - Verifique seu progresso.
 
+---
+🎉 Parabéns! Lab Concluído! 🏆
 
