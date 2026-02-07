@@ -1,10 +1,12 @@
 
 # Generate AI Images and Summarize them Using Gemini and Python
 
-**Parte 1/2 Cole no terminal e tecle ENTER**
----
 
-```bash
+**Clique em Start Lab**      
+**Parte 1/2 Copie o código abaixo, cole no terminal e pressione `ENTER`**
+
+
+```python
 
 cat <<'EOF' > bouquet_ai.py
 import vertexai
@@ -64,9 +66,12 @@ if __name__ == "__main__":
 EOF
 ```
 
-**Parte 2/2 Cole no terminal e tecle ENTER**
-```
+**Parte 2/2 Copie o código abaixo, cole no terminal e pressione `ENTER`**
+```python
 /usr/bin/python3 bouquet_ai.py
 ```
 
 - Aguarde os dados serem gerados **(acompanhe pelo terminal)** e verifique seu progresso.
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
