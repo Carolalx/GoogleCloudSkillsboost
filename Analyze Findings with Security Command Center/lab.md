@@ -1,8 +1,8 @@
 # Analyze Findings with Security Command Center - GSP1164
 
 1 - Clique em Start Lab   
-2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em Agree and Continue   
-3 - Clique para abrir o Cloud Shell >_ (ao lado do ícone do Gemini)   
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
+3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
 4 - Copie o código abaixo e cole no terminal   
 
 ```
@@ -25,6 +25,9 @@ sudo chmod +x carolalx.sh
 7 - Desta vez, digite `Y` e tecle ENTER sem acessar o link 
 8 - Quando finalizar a execução no terminal, clique no link apresentado   
 9 - Siga os passos da Task 2. do título `Create a table in Big Query`  
-10 - Fim do LAB! Parabéns...
+
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
 
    
