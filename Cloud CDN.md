@@ -2,9 +2,9 @@
 
 
 1 - Clique em Start Lab   
-2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em Agree and Continue   
-3 - Clique para abrir o Cloud Shell >_ (ao lado do ícone do Gemini)   
-4 - Copie o código abaixo e cole no terminal    
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`    
+3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
+4 - Digite no terminal: (ou copie e cole)   
 5 - Aguarde a execução, e verifique seu progresso, leva um tempo para a confirmação de conclusão.   
 
 ```bash
@@ -78,4 +78,7 @@ curl -X POST -H "Content-Type: application/json" \
   }' \
   "https://compute.googleapis.com/compute/v1/projects/$PROJECT_ID/global/forwardingRules"
   ```
+
+---
+🎉 Parabéns! Lab Concluído! 🏆
 
