@@ -20,15 +20,15 @@ sudo chmod +x carolalx.sh
 5 - Verifique seu progresso até Task 6. --para completar até a 6 será necessário:   
    - Na barra de pesquisa digite: `Cloud Run Functions`   
    - No menu da esquerda selecione `Services`, escolha o serviço `hello-world-colored`, clique em `Edit & Deploy New Revision`   
-   - Em `Variables & Secrets` altere `orange` para `**yellow**`, role a paginá até o fim e clique em `Deploy`<br>
+   - Em `Variables & Secrets` altere `orange` para **`yellow`**, role a paginá até o fim e clique em `Deploy`<br>
    - Novamente no menu da esquerda selecione `Services`, escolha o serviço `slow-function`, clique em `Edit & Deploy New Revision`     
-   - Em `Revision scaling`, `Minimum number of instances ` selecione `**1**` e em `Maximum number of instances` selecione `**4**`  role a paginá até o fim e clique em `Deploy`<br>     
+   - Em `Revision scaling`, `Minimum number of instances ` selecione **`1`** e em `Maximum number of instances` selecione **`4`**  role a paginá até o fim e clique em `Deploy`<br>     
 6 - Retorne ao terminal e digite `Y` e `ENTER`   
 7 - Após completar a execução...   
    - No menu da esquerda selecione `Services`, escolha o serviço `slow-concurrent-function`, clique em `Edit & Deploy New Revision`  
-   - Em `Resources` > `CPU` selecione `**1**`,
-   - Em `Requests` > `Maximum concurrent requests per instance` digite `**100**`,   
-   - Em `Revision scaling` > `Maximum number of instances` digite `**4**`,
+   - Em `Resources` > `CPU` selecione **`1`**,
+   - Em `Requests` > `Maximum concurrent requests per instance` digite **`100`**,   
+   - Em `Revision scaling` > `Maximum number of instances` digite **`4`**,
    -   role a paginá até o fim e clique em `Deploy`<br>
 
 8 - Verifique seu progresso.   
