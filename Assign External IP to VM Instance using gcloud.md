@@ -1,4 +1,4 @@
-🌐 Assign External IP to VM Instance using gcloud 🚀 Open Lab
+🌐 Assign External IP to VM Instance using gcloud 🚀   
 
 1 - Clique em Start Lab   
 2 - Copie o código abaixo e cole no terminal
