@@ -6,8 +6,8 @@
 4 - Copie todo o codigo, cole no terminal e pressione `ENTER`   
 
 ```
-gsutil iam ch -d allUsers:objectViewer gs://Bucket name
-gsutil iam get gs://Bucket name
+gsutil iam ch -d allUsers:objectViewer gs://<cole aqui bucket name>
+gsutil iam get gs://Bucket name<cole aqui bucket name>
 ```
  
 5 - Verifique seu Progresso!
