@@ -1,3 +1,9 @@
+## 🌐 Manage Cloud Storage Lifecycle Policy using gcloud storage 🚀
+
+1 - Clique em Start Lab
+2 - Execute o código abaixo em seu terminal
+
+```
 PROJECT_ID=$(gcloud config get-value project)
 
 cat <<EOF > lifecycle.json
@@ -48,3 +54,8 @@ EOF
 
 
 gsutil lifecycle set lifecycle.json gs://$PROJECT_ID-bucket
+```
+
+---
+
+# 🏆 Parabéns LAB Concluído
