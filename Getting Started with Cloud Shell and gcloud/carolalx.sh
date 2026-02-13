@@ -16,9 +16,9 @@ BOLD=$'\033[1m'
 UNDERLINE=$'\033[4m'
 
 # Header Section
-echo "${CYAN}${BOLD}╔════════════════════════════════════════════════════════╗${RESET}"
+echo "${CYAN}${BOLD}╔═════════════════════════════╗${RESET}"
 echo "${CYAN}${BOLD}         G STARTING NOW              ${RESET}"
-echo "${CYAN}${BOLD}╚════════════════════════════════════════════════════════╝${RESET}"
+echo "${CYAN}${BOLD}╚═════════════════════════════╝${RESET}"
 echo
 echo "${BLUE}${BOLD}⚡ Initializing GCE Lab Instance Setup...${RESET}"
 echo
