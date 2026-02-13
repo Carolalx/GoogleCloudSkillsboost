@@ -6,7 +6,7 @@
 4 - Copie o código abaixo e cole no terminal
 
 ```
-curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Creating%20a%20Persistent%20Disk/carolaxl.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Creating%20a%20Persistent%20Disk/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
