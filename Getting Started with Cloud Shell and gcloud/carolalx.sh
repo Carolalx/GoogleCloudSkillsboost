@@ -20,9 +20,6 @@ echo "${CYAN}${BOLD}╔═══════════════════
 echo "${CYAN}${BOLD}         G STARTING NOW              ${RESET}"
 echo "${CYAN}${BOLD}╚════════════════════════════════════════════════════════╝${RESET}"
 echo
-echo "${MAGENTA}${BOLD}          Expert Tutorial by Dr. Abhishek              ${RESET}"
-echo "${YELLOW}For more GCP tutorials, visit: ${UNDERLINE}https://www.youtube.com/@drabhishek.5460${RESET}"
-echo
 echo "${BLUE}${BOLD}⚡ Initializing GCE Lab Instance Setup...${RESET}"
 echo
 
