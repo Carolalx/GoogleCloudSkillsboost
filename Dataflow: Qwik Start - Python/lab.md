@@ -18,5 +18,7 @@ sudo chmod +x carolalx.sh
 
 5 - Verifique seu Progresso! (pode levar alguns segundos)
 
+---
+
 🎉 Parabéns! Lab Concluído! 🏆
 
