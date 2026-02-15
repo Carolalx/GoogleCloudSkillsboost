@@ -6,12 +6,12 @@
 4 - Execute o código abaixo no terminal   
 
 ```
-curl -LO 
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Set%20Up%20Network%20Load%20Balancers/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Informe a Region solicitada e aguarde completar a execução           
+5 - Informe a `Region` solicitada e aguarde completar a execução           
 6 - Verifique seu Progresso!
 
 ---
