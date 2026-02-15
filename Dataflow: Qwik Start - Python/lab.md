@@ -16,7 +16,12 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso! (pode levar alguns segundos)
+5 - Acompanhe o progresso em:   
+```
+https://console.cloud.google.com/dataflow/jobs?
+```
+
+6 - Verifique seu Progresso! (após uns 5 mins)
 
 ---
 
