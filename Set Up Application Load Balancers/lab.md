@@ -4,11 +4,11 @@
 2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
 3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
 4 - Execute os códigos abaixo no terminal   
-5 - Informe a `REGION` e `ZONE` (task1.2) solicitada e aguarde completar a execução   
 
 ```
 export region=
 ```
+5 - Informe a `REGION`(task1.1) e `ZONE` (task1.2) solicitada e aguarde completar a execução  
 ```
 export zone=
 ```
