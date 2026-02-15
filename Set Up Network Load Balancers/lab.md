@@ -11,7 +11,7 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Informe a `Region` solicitada e aguarde completar a execução           
+5 - Informe a `ZONE` (task1.2) solicitada e aguarde completar a execução           
 6 - Verifique seu Progresso!
 
 ---
