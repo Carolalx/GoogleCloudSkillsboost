@@ -1,4 +1,4 @@
-## 🌐 Dataprep: Qwik Start - GSP105 🚀
+## 🌐 Service Directory: Qwik Start - GSP732 🚀
 
 1 - Clique em `Start Lab`   
 2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
@@ -6,7 +6,7 @@
 4 - Execute o código abaixo no terminal   
 
 ```
-curl -LO
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Service%20Directory%3A%20Qwik%20Start/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
