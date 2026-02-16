@@ -1,246 +1,126 @@
 #!/bin/bash
+# Define color variables
+BLACK=`tput setaf 0`
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+YELLOW=`tput setaf 3`
+BLUE=`tput setaf 4`
+MAGENTA=`tput setaf 5`
+CYAN=`tput setaf 6`
+WHITE=`tput setaf 7`
 
-BLACK_TEXT=$'\033[0;90m'
-RED_TEXT=$'\033[0;91m'
-GREEN_TEXT=$'\033[0;92m'
-YELLOW_TEXT=$'\033[0;93m'
-BLUE_TEXT=$'\033[0;94m'
-MAGENTA_TEXT=$'\033[0;95m'
-CYAN_TEXT=$'\033[0;96m'
-WHITE_TEXT=$'\033[0;97m'
-TEAL_TEXT=$'\033[38;5;50m'
-PURPLE_TEXT=$'\033[0;35m'
-GOLD_TEXT=$'\033[0;33m'
-LIME_TEXT=$'\033[0;92m'
-MAROON_TEXT=$'\033[0;91m'
-NAVY_TEXT=$'\033[0;94m'
+BG_BLACK=`tput setab 0`
+BG_RED=`tput setab 1`
+BG_GREEN=`tput setab 2`
+BG_YELLOW=`tput setab 3`
+BG_BLUE=`tput setab 4`
+BG_MAGENTA=`tput setab 5`
+BG_CYAN=`tput setab 6`
+BG_WHITE=`tput setab 7`
 
-BOLD_TEXT=$'\033[1m'
-UNDERLINE_TEXT=$'\033[4m'
-BLINK_TEXT=$'\033[5m'
-NO_COLOR=$'\033[0m'
-RESET_FORMAT=$'\033[0m'
-REVERSE_TEXT=$'\033[7m'
+BOLD=`tput bold`
+RESET=`tput sgr0`
 
 clear
 
-# Welcome message
-echo "${CYAN_TEXT}${BOLD_TEXT}===============================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}      INITIATING EXECUTION...  ${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}===============================${RESET_FORMAT}"
+
+echo "${BLUE}${BOLD}===================================================${RESET}"
+echo "${BLUE}${BOLD}                  INICIANDO LAB                    ${RESET}"
+echo "${BLUE}${BOLD}===================================================${RESET}"
+echo
+echo "${GREEN}${BOLD}Starting IAP Configuration Lab${RESET}"
 echo
 
+# Step 1: Export Project ID and Project Number
+echo "${CYAN}${BOLD}➤ Retrieving Project Information${RESET}"
+export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} --format="value(projectNumber)")
+export ZONE=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 
-# ===============================
-# USER INPUT SECTION (ADDED)
-# ===============================
+echo "${GREEN}✓ Project ID: $PROJECT_ID${RESET}"
+echo "${GREEN}✓ Project Number: $PROJECT_NUMBER${RESET}"
+echo "${GREEN}✓ Zone: $ZONE${RESET}"
 echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}Please enter required values:${RESET_FORMAT}"
+
+# Step 2: Enable IAP API
+echo "${CYAN}${BOLD}➤ Enabling IAP API${RESET}"
+gcloud services enable iap.googleapis.com
+echo "${GREEN}✓ IAP API enabled${RESET}"
 echo
 
-read -p "${YELLOW_TEXT}Enter User Email to Remove (USER_2): ${WHITE_TEXT}${BOLD_TEXT}" USER_2
-echo -e "${RESET_FORMAT}"
-
-read -p "${YELLOW_TEXT}Enter Zone (e.g. us-central1-a): ${WHITE_TEXT}${BOLD_TEXT}" ZONE
-echo -e "${RESET_FORMAT}"
-
-read -p "${YELLOW_TEXT}Enter Pub/Sub Topic Name (TOPIC): ${WHITE_TEXT}${BOLD_TEXT}" TOPIC
-echo -e "${RESET_FORMAT}"
-
-read -p "${YELLOW_TEXT}Enter Cloud Function Name (FUNCTION): ${WHITE_TEXT}${BOLD_TEXT}" FUNCTION
-echo -e "${RESET_FORMAT}"
-
-export USER_2
-export ZONE
-export TOPIC
-export FUNCTION
-
-# Compute region from zone
-export REGION="${ZONE%-*}"
-
-
-# ===============================
-# SERVICES ENABLE
-# ===============================
-
-gcloud services enable \
-  artifactregistry.googleapis.com \
-  cloudfunctions.googleapis.com \
-  cloudbuild.googleapis.com \
-  eventarc.googleapis.com \
-  run.googleapis.com \
-  logging.googleapis.com \
-  pubsub.googleapis.com
-
-sleep 30
-
-PROJECT_NUMBER=$(gcloud projects describe $DEVSHELL_PROJECT_ID --format='value(projectNumber)')
-
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
-    --role=roles/eventarc.eventReceiver
-
-sleep 20
-
-SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $DEVSHELL_PROJECT_ID)"
-
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role='roles/pubsub.publisher'
-
-sleep 20
-
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
-    --role=roles/iam.serviceAccountTokenCreator
-
-sleep 20
-
-gsutil mb -l $REGION gs://$DEVSHELL_PROJECT_ID-bucket
-
-gcloud pubsub topics create $TOPIC
-
-mkdir lol
-cd lol
-
-cat > index.js <<'EOF_END'
-const functions = require('@google-cloud/functions-framework');
-const crc32 = require("fast-crc32c");
-const { Storage } = require('@google-cloud/storage');
-const gcs = new Storage();
-const { PubSub } = require('@google-cloud/pubsub');
-const imagemagick = require("imagemagick-stream");
-
-functions.cloudEvent('$FUNCTION_NAME', cloudEvent => {
-  const event = cloudEvent.data;
-
-  console.log(`Event: ${event}`);
-  console.log(`Hello ${event.bucket}`);
-
-  const fileName = event.name;
-  const bucketName = event.bucket;
-  const size = "64x64"
-  const bucket = gcs.bucket(bucketName);
-  const topicName = "$TOPIC_NAME";
-  const pubsub = new PubSub();
-  if ( fileName.search("64x64_thumbnail") == -1 ){
-    var filename_split = fileName.split('.');
-    var filename_ext = filename_split[filename_split.length - 1];
-    var filename_without_ext = fileName.substring(0, fileName.length - filename_ext.length );
-    if (filename_ext.toLowerCase() == 'png' || filename_ext.toLowerCase() == 'jpg'){
-      console.log(`Processing Original: gs://${bucketName}/${fileName}`);
-      const gcsObject = bucket.file(fileName);
-      let newFilename = filename_without_ext + size + '_thumbnail.' + filename_ext;
-      let gcsNewObject = bucket.file(newFilename);
-      let srcStream = gcsObject.createReadStream();
-      let dstStream = gcsNewObject.createWriteStream();
-      let resize = imagemagick().resize(size).quality(90);
-      srcStream.pipe(resize).pipe(dstStream);
-      return new Promise((resolve, reject) => {
-        dstStream
-          .on("error", (err) => {
-            console.log(`Error: ${err}`);
-            reject(err);
-          })
-          .on("finish", () => {
-            console.log(`Success: ${fileName} → ${newFilename}`);
-              gcsNewObject.setMetadata(
-              {
-                contentType: 'image/'+ filename_ext.toLowerCase()
-              }, function(err, apiResponse) {});
-              pubsub
-                .topic(topicName)
-                .publisher()
-                .publish(Buffer.from(newFilename))
-                .then(messageId => {
-                  console.log(`Message ${messageId} published.`);
-                })
-                .catch(err => {
-                  console.error('ERROR:', err);
-                });
-          });
-      });
-    }
-    else {
-      console.log(`gs://${bucketName}/${fileName} is not an image I can handle`);
-    }
-  }
-  else {
-    console.log(`gs://${bucketName}/${fileName} already has a thumbnail`);
-  }
-});
-EOF_END
-
-sed -i "8c\functions.cloudEvent('$FUNCTION', cloudEvent => { " index.js
-sed -i "18c\  const topicName = '$TOPIC';" index.js
-
-cat > package.json <<EOF_END
-{
-    "name": "thumbnails",
-    "version": "1.0.0",
-    "description": "Create Thumbnail of uploaded image",
-    "scripts": {
-      "start": "node index.js"
-    },
-    "dependencies": {
-      "@google-cloud/functions-framework": "^3.0.0",
-      "@google-cloud/pubsub": "^2.0.0",
-      "@google-cloud/storage": "^5.0.0",
-      "fast-crc32c": "1.0.4",
-      "imagemagick-stream": "4.1.1"
-    },
-    "devDependencies": {},
-    "engines": {
-      "node": ">=4.3.2"
-    }
-  }
-EOF_END
-
-PROJECT_ID=$(gcloud config get-value project)
-BUCKET_SERVICE_ACCOUNT="${PROJECT_ID}@${PROJECT_ID}.iam.gserviceaccount.com"
-
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member=serviceAccount:$BUCKET_SERVICE_ACCOUNT \
-  --role=roles/pubsub.publisher
-
-
-deploy_function() {
-    gcloud functions deploy $FUNCTION \
-    --gen2 \
-    --runtime nodejs20 \
-    --trigger-resource $DEVSHELL_PROJECT_ID-bucket \
-    --trigger-event google.storage.object.finalize \
-    --entry-point $FUNCTION \
-    --region=$REGION \
-    --source . \
-    --quiet
-}
-
-SERVICE_NAME="$FUNCTION"
-
-while true; do
-  deploy_function
-
-  if gcloud run services describe $SERVICE_NAME --region $REGION &> /dev/null; then
-    echo "Cloud Run service is created. Exiting the loop."
-    break
-  else
-    echo "Waiting for Cloud Run service to be created..."
-    sleep 20
-  fi
-done
-
-curl -o map.jpg https://storage.googleapis.com/cloud-training/gsp315/map.jpg
-
-gsutil cp map.jpg gs://$DEVSHELL_PROJECT_ID-bucket/map.jpg
-
-gcloud projects remove-iam-policy-binding $DEVSHELL_PROJECT_ID \
---member=user:$USER_2 \
---role=roles/viewer
-
-
+# Step 3: Create Linux VM
+echo "${CYAN}${BOLD}➤ Creating Linux IAP Instance${RESET}"
+gcloud compute instances create linux-iap \
+    --project=$PROJECT_ID \
+    --zone=$ZONE \
+    --machine-type=e2-medium \
+    --network-interface=stack-type=IPV4_ONLY,subnet=default,no-address
+echo "${GREEN}✓ Linux IAP instance created${RESET}"
 echo
-echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+
+# Step 4: Create Windows VM
+echo "${CYAN}${BOLD}➤ Creating Windows IAP Instance${RESET}"
+gcloud compute instances create windows-iap \
+    --project=$PROJECT_ID \
+    --zone=$ZONE \
+    --machine-type=e2-medium \
+    --network-interface=stack-type=IPV4_ONLY,subnet=default,no-address \
+    --create-disk=auto-delete=yes,boot=yes,device-name=windows-iap,image=projects/windows-cloud/global/images/windows-server-2016-dc-v20240313,mode=rw,size=50,type=projects/$PROJECT_ID/zones/$ZONE/diskTypes/pd-standard \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --reservation-affinity=any
+echo "${GREEN}✓ Windows IAP instance created${RESET}"
 echo
+
+# Step 5: Create Windows Connectivity VM
+echo "${CYAN}${BOLD}➤ Creating Windows Connectivity Instance${RESET}"
+gcloud compute instances create windows-connectivity \
+    --project=$PROJECT_ID \
+    --zone=$ZONE \
+    --machine-type=e2-medium \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
+    --metadata=enable-oslogin=true \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --scopes=https://www.googleapis.com/auth/cloud-platform \
+    --create-disk=auto-delete=yes,boot=yes,device-name=windows-connectivity,image=projects/qwiklabs-resources/global/images/iap-desktop-v001,mode=rw,size=50,type=projects/$PROJECT_ID/zones/$ZONE/diskTypes/pd-standard \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --reservation-affinity=any
+echo "${GREEN}✓ Windows Connectivity instance created${RESET}"
+echo
+
+# Step 6: Create Firewall Rule
+echo "${CYAN}${BOLD}➤ Creating Firewall Rule for IAP${RESET}"
+gcloud compute firewall-rules create allow-ingress-from-iap \
+  --network default \
+  --allow tcp:22,tcp:3389 \
+  --source-ranges 35.235.240.0/20
+echo "${GREEN}✓ Firewall rule created${RESET}"
+echo
+
+# Step 7: Display Console Links
+echo "${CYAN}${BOLD}➤ Console Links for Verification${RESET}"
+echo "${YELLOW}Firewall Rule:${RESET}"
+echo "${BLUE}https://console.cloud.google.com/net-security/firewall-manager/firewall-policies/details/allow-ingress-from-iap?project=$PROJECT_ID${RESET}"
+echo
+echo "${YELLOW}IAP Settings:${RESET}"
+echo "${BLUE}https://console.cloud.google.com/security/iap?tab=ssh-tcp-resources&project=$PROJECT_ID${RESET}"
+echo
+
+# Step 8: Display Service Account
+echo "${CYAN}${BOLD}➤ Service Account Information${RESET}"
+echo "${GREEN}Service Account: $PROJECT_NUMBER-compute@developer.gserviceaccount.com${RESET}"
+echo
+
+# Completion Message
+echo "${BLUE}${BOLD}======================================================${RESET}"
+echo "${BLUE}${BOLD}               LAB CONCLUÍDO                          ${RESET}"
+echo "${BLUE}${BOLD}======================================================${RESET}"
+echo
+
+# Cleanup
+cd
+rm -f gsp* arc* shell* 2>/dev/null
