@@ -6,7 +6,7 @@
 4 - Execute o código abaixo no terminal
 
 ```
-curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Securing%20Virtual%20Machines%20using%20Chrome%20Enterprise%20Premium/carolalx.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Set%20Up%20an%20App%20Dev%20Environment%20on%20Google%20Cloud%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
