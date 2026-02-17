@@ -1,5 +1,7 @@
-## 🌐 Prepare Data for ML APIs on Google Cloud: Challenge Lab GPS323 🚀
+## 🌐 Prepare Data for ML APIs on Google Cloud: Challenge Lab - GPS323 🚀
 
+
+---instruções incompletas... rever
 1 - Clique em `Start Lab`   
 2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
 3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
@@ -16,7 +18,7 @@ export BUCKET_URL_2=
 
 5 - Execute o código abaixo no terminal
 ```
-curl -LO
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Prepare%20Data%20for%20ML%20APIs%20on%20Google%20Cloud%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
