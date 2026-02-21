@@ -17,10 +17,9 @@ UNDERLINE_TEXT=$'\033[4m'
 
 # Display Welcome Message
 print_welcome() {
-echo "${BLUE_TEXT}${BOLD_TEXT}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${RESET_FORMAT}"
-echo "${BLUE_TEXT}${BOLD_TEXT}┃           C l o u d o A r c          ┃${RESET_FORMAT}"
-echo "${BLUE_TEXT}${BOLD_TEXT}┃               Cloud Lab              ┃${RESET_FORMAT}"
-echo "${BLUE_TEXT}${BOLD_TEXT}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┃           INICIANDO EXECUÇÃO...       ┃${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${RESET_FORMAT}"
 echo
 }
 
