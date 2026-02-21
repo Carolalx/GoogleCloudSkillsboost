@@ -7,18 +7,12 @@
 
 
 ```
-curl -LO 
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Build%20a%20Data%20Warehouse%20with%20BigQuery%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Abra uma segunda janela de teminal e digite:   
-`gcloud auth login`   
-
-6 - digite: `Y`   
-7 - Acesse o link gerado no Shell, selecione o usuário, clique em Allow   
-8 - Finalmente clique em `COPY` e cole no terminal (abaixo do link gerado)    
-9 - Verifique seu Progresso! (pode demorar um pouco)
+5 - Verifique seu Progresso! (pode demorar um pouco)
 
 ---
 
