@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define color variables
+# Color Definitions
 BLACK_TEXT=$'\033[0;90m'
 RED_TEXT=$'\033[0;91m'
 GREEN_TEXT=$'\033[0;92m'
@@ -12,50 +12,53 @@ WHITE_TEXT=$'\033[0;97m'
 
 NO_COLOR=$'\033[0m'
 RESET_FORMAT=$'\033[0m'
-
-# Define text formatting variables
 BOLD_TEXT=$'\033[1m'
 UNDERLINE_TEXT=$'\033[4m'
 
-clear
+# Display Welcome Message
+print_welcome() {
+echo "${BLUE_TEXT}${BOLD_TEXT}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┃           C l o u d o A r c          ┃${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┃               Cloud Lab              ┃${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${RESET_FORMAT}"
+echo
+}
 
-# Welcome message
-echo "${CYAN_TEXT}${BOLD_TEXT}================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}       INITIATING EXECUTION...  ${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}================================${RESET_FORMAT}"
+# Display Completion Message
+print_completion() {
+  echo
+echo "${GREEN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}               LAB COMPLETED SUCCESSFULLY!!!           ${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo
+}
+
+
+
+# Get User Input with Validation
+read -p "${RED_TEXT}${BOLD_TEXT}Bucket Name: ${RESET_FORMAT}" BUCKET_NAME
+echo "${YELLOW_TEXT}${BOLD_TEXT}Bucket Name: $BUCKET_NAME ${RESET_FORMAT}"
 echo
 
+read -p "${RED_TEXT}${BOLD_TEXT}Topic Name: ${RESET_FORMAT}" TOPIC_NAME
+echo "${YELLOW_TEXT}${BOLD_TEXT}Topic Name: $TOPIC_NAME ${RESET_FORMAT}"
+echo
 
+read -p "${RED_TEXT}${BOLD_TEXT}Cloud Function Name: ${RESET_FORMAT}" FUNCTION_NAME
+echo "${YELLOW_TEXT}${BOLD_TEXT}Function Name: $FUNCTION_NAME ${RESET_FORMAT}"
+echo
 
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+read -p "${RED_TEXT}${BOLD_TEXT}Enter Region: ${RESET_FORMAT}" REGION
+echo "${YELLOW_TEXT}${BOLD_TEXT}Region: $REGION ${RESET_FORMAT}"
+echo
 
-BG_BLACK=`tput setab 0`
-BG_RED=`tput setab 1`
-BG_GREEN=`tput setab 2`
-BG_YELLOW=`tput setab 3`
-BG_BLUE=`tput setab 4`
-BG_MAGENTA=`tput setab 5`
-BG_CYAN=`tput setab 6`
-BG_WHITE=`tput setab 7`
+# Set Configuration
+gcloud config set compute/region $REGION
+export PROJECT_ID=$(gcloud config get-value project)
 
-BOLD=`tput bold`
-RESET=`tput sgr0`
-#----------------------------------------------------start--------------------------------------------------#
-
-
-PROJECT_NUMBER=$(gcloud projects describe $DEVSHELL_PROJECT_ID --format='value(projectNumber)')
-
-PROJECT_ID=$(gcloud config get-value project)
-
-BUCKET_SERVICE_ACCOUNT="${PROJECT_ID}@${PROJECT_ID}.iam.gserviceaccount.com"
-
+# Enable Required Services
+echo
+echo "${RED_TEXT}${BOLD_TEXT}Enabling Google Cloud Services...${RESET_FORMAT}"
 gcloud services enable \
   artifactregistry.googleapis.com \
   cloudfunctions.googleapis.com \
@@ -65,44 +68,33 @@ gcloud services enable \
   logging.googleapis.com \
   pubsub.googleapis.com
 
-sleep 50
+# Create Infrastructure
+echo
+echo "${RED_TEXT}${BOLD_TEXT}Creating Storage Bucket...${RESET_FORMAT}"
+gsutil mb -l $REGION gs://$BUCKET_NAME
 
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
-    --role=roles/eventarc.eventReceiver
+echo
+echo "${RED_TEXT}${BOLD_TEXT}Creating Topic...${RESET_FORMAT}"
+gcloud pubsub topics create $TOPIC_NAME
 
-sleep 20
+# Configure Permissions
+PROJECT_NUMBER=$(gcloud projects list --filter="project_id:$PROJECT_ID" --format='value(project_number)')
+SERVICE_ACCOUNT=$(gsutil kms serviceaccount -p $PROJECT_NUMBER)
 
-SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $DEVSHELL_PROJECT_ID)"
-
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role='roles/pubsub.publisher'
-
-sleep 20
-
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
-    --role=roles/iam.serviceAccountTokenCreator
-
-sleep 20
-
+echo
+echo "${RED_TEXT}${BOLD_TEXT}Configuring Permissions...${RESET_FORMAT}"
 gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member=serviceAccount:$BUCKET_SERVICE_ACCOUNT \
-  --role=roles/pubsub.publisher
+  --member serviceAccount:$SERVICE_ACCOUNT \
+  --role roles/pubsub.publisher
 
-sleep 20
+# Create Function Files
+echo
+echo "${RED_TEXT}${BOLD_TEXT}Preparing Function...${RESET_FORMAT}"
+mkdir -p ~/cloud-thumbnail-function && cd $_
+touch index.js package.json
 
-gsutil mb -l $REGION gs://$BUCKET
-
-gcloud pubsub topics create $TOPIC
-
+# Generate index.js
 cat > index.js <<'EOF_END'
-
-/* globals exports, require */
-//jshint strict: false
-//jshint esversion: 6
-"use strict";
 const crc32 = require("fast-crc32c");
 const { Storage } = require('@google-cloud/storage');
 const gcs = new Storage();
@@ -112,69 +104,70 @@ const imagemagick = require("imagemagick-stream");
 exports.thumbnail = (event, context) => {
   const fileName = event.name;
   const bucketName = event.bucket;
-  const size = "64x64"
+  const size = "64x64";
   const bucket = gcs.bucket(bucketName);
-  const topicName = "$TOPIC";
+  const topicName = "TOPIC_NAME_PLACEHOLDER";
   const pubsub = new PubSub();
-  if ( fileName.search("64x64_thumbnail") == -1 ){
-    // doesn't have a thumbnail, get the filename extension
-    var filename_split = fileName.split('.');
-    var filename_ext = filename_split[filename_split.length - 1];
-    var filename_without_ext = fileName.substring(0, fileName.length - filename_ext.length );
-    if (filename_ext.toLowerCase() == 'png' || filename_ext.toLowerCase() == 'jpg'){
-      // only support png and jpg at this point
-      console.log(`Processing Original: gs://${bucketName}/${fileName}`);
+
+  if (fileName.search("64x64_thumbnail") == -1) {
+    const filename_split = fileName.split('.');
+    const filename_ext = filename_split[filename_split.length - 1];
+    const filename_without_ext = fileName.substring(0, fileName.length - filename_ext.length);
+    
+    if (filename_ext.toLowerCase() == 'png' || filename_ext.toLowerCase() == 'jpg') {
+      console.log(`Processing: gs://${bucketName}/${fileName}`);
       const gcsObject = bucket.file(fileName);
-      let newFilename = filename_without_ext + size + '_thumbnail.' + filename_ext;
-      let gcsNewObject = bucket.file(newFilename);
-      let srcStream = gcsObject.createReadStream();
-      let dstStream = gcsNewObject.createWriteStream();
-      let resize = imagemagick().resize(size).quality(90);
+      const newFilename = filename_without_ext + size + '_thumbnail.' + filename_ext;
+      const gcsNewObject = bucket.file(newFilename);
+      const srcStream = gcsObject.createReadStream();
+      const dstStream = gcsNewObject.createWriteStream();
+      const resize = imagemagick().resize(size).quality(90);
+      
       srcStream.pipe(resize).pipe(dstStream);
+      
       return new Promise((resolve, reject) => {
         dstStream
           .on("error", (err) => {
-            console.log(`Error: ${err}`);
+            console.error(`Error: ${err}`);
             reject(err);
           })
           .on("finish", () => {
-            console.log(`Success: ${fileName} → ${newFilename}`);
-              // set the content-type
-              gcsNewObject.setMetadata(
-              {
-                contentType: 'image/'+ filename_ext.toLowerCase()
-              }, function(err, apiResponse) {});
-              pubsub
-                .topic(topicName)
-                .publisher()
-                .publish(Buffer.from(newFilename))
-                .then(messageId => {
-                  console.log(`Message ${messageId} published.`);
-                })
-                .catch(err => {
-                  console.error('ERROR:', err);
-                });
+            console.log(`Created thumbnail: ${newFilename}`);
+            gcsNewObject.setMetadata({
+              contentType: 'image/' + filename_ext.toLowerCase()
+            }, (err) => {
+              if (err) console.error('Metadata error:', err);
+            });
+            
+            pubsub.topic(topicName)
+              .publisher()
+              .publish(Buffer.from(newFilename))
+              .then(messageId => {
+                console.log(`Published message ID: ${messageId}`);
+              })
+              .catch(err => {
+                console.error('Publish error:', err);
+              });
           });
       });
+    } else {
+      console.log(`Skipping: ${fileName} - Unsupported image format`);
     }
-    else {
-      console.log(`gs://${bucketName}/${fileName} is not an image I can handle`);
-    }
-  }
-  else {
-    console.log(`gs://${bucketName}/${fileName} already has a thumbnail`);
+  } else {
+    console.log(`Skipping: ${fileName} - Already has thumbnail`);
   }
 };
 EOF_END
 
-sed -i "17c\  const topicName = '$TOPIC';" index.js
+# Customize the function code
+sed -i "s/TOPIC_NAME_PLACEHOLDER/$TOPIC_NAME/" index.js
 
+# Generate package.json
 cat > package.json <<EOF_END
-
 {
-  "name": "thumbnails",
+  "name": "thumbnail-generator",
   "version": "1.0.0",
-  "description": "Create Thumbnail of uploaded image",
+  "description": "Google Cloud Function to generate image thumbnails",
   "scripts": {
     "start": "node index.js"
   },
@@ -184,53 +177,44 @@ cat > package.json <<EOF_END
     "fast-crc32c": "1.0.4",
     "imagemagick-stream": "4.1.1"
   },
-  "devDependencies": {},
   "engines": {
-    "node": ">=4.3.2"
+    "node": ">=12.0.0"
   }
 }
 EOF_END
 
+# Deploy Function
 deploy_function() {
-    gcloud functions deploy $FUNCTION \
+  echo
+  echo "${RED_TEXT}${BOLD_TEXT}Cloud Function On The Way...${RESET_FORMAT}"
+  gcloud functions deploy $FUNCTION_NAME \
     --gen2 \
     --runtime nodejs20 \
-    --trigger-resource $BUCKET \
-    --trigger-event google.storage.object.finalize \
     --entry-point thumbnail \
-    --region=$REGION \
     --source . \
+    --region $REGION \
+    --trigger-bucket $BUCKET_NAME \
+    --allow-unauthenticated \
+    --trigger-location $REGION \
+    --max-instances 5 \
     --quiet
 }
 
-SERVICE_NAME="$FUNCTION"
-
-# Loop until the Cloud Run service is created
+# Wait for deployment to complete
 while true; do
-  # Run the deployment command
-  deploy_function
-
-  # Check if Cloud Run service is created
-  if gcloud run services describe $SERVICE_NAME --region $REGION &> /dev/null; then
-    echo "Cloud Run service is created. Exiting the loop."
-    break
-  else
-    echo "Waiting for Cloud Run service to be created..."
-    sleep 10
+  if deploy_function; then
+    if gcloud functions describe $FUNCTION_NAME --region $REGION &> /dev/null; then
+      break
+    fi
   fi
+  echo "${RED_TEXT}${BOLD_TEXT}Waiting for deployment...${RESET_FORMAT}"
+  sleep 10
 done
 
-wget https://storage.googleapis.com/cloud-training/gsp315/map.jpg 
-
-gsutil cp map.jpg gs://$BUCKET
-
-
-#-----------------------------------------------------end----------------------------------------------------------#
-# Final message
+# Test with sample image
 echo
-echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT_FORMAT}"
-echo
+echo "${RED_TEXT}${BOLD_TEXT}Testing...${RESET_FORMAT}"
+wget -q https://storage.googleapis.com/cloud-training/arc102/wildlife.jpg
+gsutil cp wildlife.jpg gs://$BUCKET_NAME
 
-echo
+print_completion
