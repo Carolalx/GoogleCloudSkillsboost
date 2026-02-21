@@ -9,7 +9,8 @@ curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/
 source carolalx.sh
 ```
 
-4 - Verifique seu progresso
+4 - Quando for solicitado digite `exit` e pressione `ENTER`   
+5 - Verifique seu progresso
 
 ---
 
