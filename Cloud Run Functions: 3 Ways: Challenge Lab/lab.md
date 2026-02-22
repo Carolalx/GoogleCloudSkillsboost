@@ -128,6 +128,7 @@ gcloud functions deploy $HTTP_FUNCTION \
   --min-instances 1
 
 ```
+Pressione `Y` e `ENTER`
 
 ---
 
