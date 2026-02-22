@@ -7,6 +7,7 @@
 
 ## ☁️ Execute no Cloud Shell:
 
+**informe a `ZONE` conforme seu terminal
 ```bash
 export ZONE=
 ```
@@ -17,7 +18,11 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu progresso
+5 - Quando concluir a execução (demora um poouco), clique nos links (2) disponibilizados   
+6 - Na aba `Kubernets` copie o endereço `endpoint` de wordpres somente o início (antes dos :, tipo 34.169.233.188)   
+7 - Na aba Monitoring, clique em `Create Uptime Check `, cole o endpoint em `Hostname` em Path digite `/` e clique em `Continue` e `Continue`   
+8 - Em Title coloque `carolalx` e clique em `Create`    
+9 - Verifique seu progresso
 
 ---
 
