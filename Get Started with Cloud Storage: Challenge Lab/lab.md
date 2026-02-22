@@ -1,0 +1,24 @@
+## 🌐 Get Started with Cloud Storage: Challenge Lab - ARC111 🚀
+
+1 - Clique em `Start Lab`   
+2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
+3 - Clique para abrir o Cloud Shell `>_` (ao lado do ícone do Gemini)   
+4 - Execute o código abaixo no terminal
+
+
+```
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Get%20Started%20with%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx.sh
+sudo chmod +x carolalx.sh
+./carolalx.sh
+```
+
+🚨IMEDIATAMENTE ANTES DA TASK 1 tem o numero do form que você precisa informar   
+
+5 - Cole no terminal as informações solicitadas conforme seu lab   
+6 - Verifique seu Progresso! (pode demorar um pouco)   
+
+---
+
+🎉 Parabéns! Lab Concluído! 🏆
+
+
