@@ -19,15 +19,15 @@ export ZONE=
 ```
 
 ```bash
-curl -LO https://raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/TechCode1.sh
-sudo chmod +x TechCode1.sh 
-./TechCode1.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx1.sh
+sudo chmod +x carolalx1.sh 
+./carolalx1.sh
 ```
 
 ### Form 2:
 
 * **Task 1. Create a lake in Dataplex and add a zone to your .**
-* **Task 2. Environment Creation for Dataplex .**
+* **Task 2. Create an entry group .**
 * **Task 3. Attach an existing Cloud Storage bucket to the zone.**
 * **Task 4. Create a tag template (Storage bucket).**
 
@@ -38,9 +38,9 @@ export ZONE=
 ```
 
 ```bash
-curl -LO https://raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/TechCode2.sh
-sudo chmod +x TechCode2.sh 
-./TechCode2.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx2.sh
+sudo chmod +x carolalx2.sh 
+./carolalx2.sh
 ```
 
 ### Form 3:
@@ -57,9 +57,9 @@ export ZONE=
 ```
 
 ```bash
-curl -LO https://raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/TechCode3.sh
-sudo chmod +x TechCode3.sh 
-./TechCode3.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx3.sh
+sudo chmod +x carolalx3.sh 
+./carolalx3.sh
 ```
 
 ### Form 4:
@@ -76,14 +76,12 @@ export ZONE=
 ```
 
 ```bash
-curl -LO https://raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/TechCode4.sh
-sudo chmod +x TechCode4.sh 
-./TechCode4.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20a%20Secure%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx4.sh
+sudo chmod +x carolalx4.sh 
+./carolalx4.sh
 ```
-
-</div>
 
 ---
 
-## 🎉 **Congratulations! Lab Completed Successfully!** 🏆  
+## 🎉 **Parabéns! Laboratório Concluído!** 🏆  
 
