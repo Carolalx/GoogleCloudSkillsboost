@@ -7,6 +7,30 @@
 
 ## ☁️ Execute no Cloud Shell:
 
+```
+export BUCKET_NAME=
+
+export DATASET_NAME=
+
+export TABLE_NAME=
+
+export TOPIC_NAME=
+
+
+
+gsutil mb gs://$BUCKET_NAME
+
+bq mk $DATASET_NAME
+
+bq mk --table \
+$DEVSHEL_PROJECT_ID:$DATASET_NAME.$TABLE_NAME \
+data:string
+
+gcloud pubsub topics create $TOPIC_NAME
+
+gcloud pubsub subscriptions create $TOPIC_NAME-sub --topic=$TOPIC_NAME
+```
+
 ```bash
 curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Streaming%20Analytics%20into%20BigQuery%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
