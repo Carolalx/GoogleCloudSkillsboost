@@ -6,6 +6,7 @@
 4 - Execute o código abaixo no terminal
 
 ## ☁️ Execute no Cloud Shell:
+** complete os exports
 
 ```
 export BUCKET_NAME=
