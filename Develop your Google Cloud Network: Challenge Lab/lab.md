@@ -8,6 +8,10 @@
 ## ☁️ Execute no Cloud Shell:
 
 ```bash
+export ZONE=
+```
+
+```bash
 curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Develop%20your%20Google%20Cloud%20Network%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
