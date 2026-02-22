@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO https://github.com/Carolalx/GoogleCloudSkillsboost/blob/main/Deploy%20Kubernetes%20Applications%20on%20Google%20Cloud%3A%20Challenge%20Lab/carolalx.sh
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Deploy%20Kubernetes%20Applications%20on%20Google%20Cloud%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
