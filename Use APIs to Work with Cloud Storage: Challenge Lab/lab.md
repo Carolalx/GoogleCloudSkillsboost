@@ -8,11 +8,11 @@
 ## ☁️ Execute no Cloud Shell:
 
 ```bash
-curl -LO 
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Use%20APIs%20to%20Work%20with%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
-5 - Verifique seu progresso, quando faltar a conclusão somente da ultima Task, retorne ao terminal e pressione `ENTER`
+5 - Verifique seu progresso até a Task 4, quando estiverem concluídas, retorne ao terminal e pessione `ENTER`
 
 ---
 
