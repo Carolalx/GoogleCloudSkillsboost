@@ -12,7 +12,8 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso! (demora quase 20 minutos)
+5 - Coloque as informações solicitas e depois digite `yes`   
+6 - Verifique seu Progresso! (demora quase 20 minutos)
 
 ---
 
