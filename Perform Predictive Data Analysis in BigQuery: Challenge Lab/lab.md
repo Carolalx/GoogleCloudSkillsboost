@@ -12,7 +12,10 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso! 
+5 - Verifique seu Progresso até os 90 pontos...    
+6 - Pesquise `Big Query` em Untitle cole o comando da Task 4 e clique em `Run`   
+7 - Em nova aba, cole o segundo comando de Task 4 e clique em `Run`    
+8 - Verifique seu progresso novamente.
 
 ---
 
