@@ -13,8 +13,8 @@ sudo chmod +x carolalx.sh
 4 - Abra o link apresentado e aguarde 4 minutos, clique em `Open Jupyter Lab`    
 5 - em `Other` clique em `Terminal`   
 6 - Execute o comando disponibilizado em Task 2   
-7 - Faça download do arquivo:  
-## 👉 Download [Here](https://drive.google.com/uc?export=download&id=15Gb8EbOCRY1Xsyorg1JRCLn25baz5A8j)
+7 - Faça download do arquivo:  .py
+
 8 - Faça o upload do arquivo (seta abaixo de Run), selecione `Overwrite` > `Tensor Flow`   
 9 - Selecione `Run` `All cells`   
 10 - Verifique o seu progresso   
