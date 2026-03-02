@@ -1,4 +1,4 @@
-## 🌐 APIs Explorer: App Engine - GSP079 🚀
+## 🌐 Getting Started with Cloud KMS - GSP079 🚀
 
 1 - Clique em `Start Lab`   
 2 - Abra o console em janela anonima > insira usuáirio e senha > Clique em `Agree and Continue`   
