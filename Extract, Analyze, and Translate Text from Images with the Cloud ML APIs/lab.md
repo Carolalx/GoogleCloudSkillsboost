@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Extract%2C%20Analyze%2C%20and%20Translate%20Text%20from%20Images%20with%20the%20Cloud%20ML%20APIs/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
