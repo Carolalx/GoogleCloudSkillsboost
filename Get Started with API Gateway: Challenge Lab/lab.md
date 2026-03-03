@@ -6,7 +6,7 @@
 4 - Execute o código abaixo e cole no terminal:
 
 ```bash
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Get%20Started%20with%20API%20Gateway%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
