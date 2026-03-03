@@ -31,9 +31,6 @@ print_completion() {
     echo "${GREEN_TEXT}${BOLD_TEXT}           LABORATÓRIO CONCLUÍDO             ${RESET_FORMAT}"
     echo "${GREEN_TEXT}${BOLD_TEXT}=============================================${RESET_FORMAT}"
     echo
-    echo "${BLUE_TEXT}${BOLD_TEXT}For more cloud tutorials, visit:${RESET_FORMAT}"
-    echo "${BLUE_TEXT}https://www.youtube.com/@drabhishek.5460/videos${RESET_FORMAT}"
-    echo
 }
 
 print_welcome
