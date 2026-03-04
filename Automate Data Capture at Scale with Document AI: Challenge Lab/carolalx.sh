@@ -1,140 +1,60 @@
-# Set text styles
-YELLOW=$(tput setaf 3)
-BOLD=$(tput bold)
-RESET=$(tput sgr0)
-
-echo "Please set the below values correctly"
-read -p "${YELLOW}${BOLD}Enter the REGION: ${RESET}" REGION
-read -p "${YELLOW}${BOLD}Enter the PROCESSOR: ${RESET}" PROCESSOR
-
-# Export variables after collecting input
-export REGION PROCESSOR
 
 
-gcloud auth list
+
+
+
+sudo apt-get update
+sudo apt-get install jq -y
+
+sudo apt-get install python3-pip -y
 
 export PROJECT_ID=$(gcloud config get-value core/project)
 
-gcloud services enable documentai.googleapis.com --project $DEVSHELL_PROJECT_ID
+export SA_NAME="document-ai-service-account"
+gcloud iam service-accounts create $SA_NAME --display-name $SA_NAME
 
-sleep 10
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+--member="serviceAccount:$SA_NAME@${PROJECT_ID}.iam.gserviceaccount.com" \
+--role="roles/documentai.apiUser"
+
+gcloud iam service-accounts keys create key.json \
+--iam-account  $SA_NAME@${PROJECT_ID}.iam.gserviceaccount.com
+
+export GOOGLE_APPLICATION_CREDENTIALS="$PWD/key.json"
+
+gsutil cp gs://cloud-training/gsp924/health-intake-form.pdf .
+
+echo '{"inlineDocument": {"mimeType": "application/pdf","content": "' > temp.json
+base64 health-intake-form.pdf >> temp.json
+echo '"}}' >> temp.json
+cat temp.json | tr -d \\n > request.json
 
 
-mkdir ./document-ai-challenge
-gsutil -m cp -r gs://spls/gsp367/* \
-  ~/document-ai-challenge/
+sleep 60
 
-
-ACCESS_CP=$(gcloud auth application-default print-access-token)
-
+export LOCATION="us"
+export PROJECT_ID=$(gcloud config get-value core/project)
 curl -X POST \
-  -H "Authorization: Bearer $ACCESS_CP" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "display_name": "'"$PROCESSOR"'",
-    "type": "FORM_PARSER_PROCESSOR"
-  }' \
-  "https://documentai.googleapis.com/v1/projects/$PROJECT_ID/locations/us/processors"
+-H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
+-H "Content-Type: application/json; charset=utf-8" \
+-d @request.json \
+https://${LOCATION}-documentai.googleapis.com/v1beta3/projects/${PROJECT_ID}/locations/${LOCATION}/processors/${PROCESSOR_ID}:process > output.json
 
 
-gsutil mb -c standard -l $REGION -b on gs://$PROJECT_ID-input-invoices
+sleep 60
 
-gsutil mb -c standard -l $REGION -b on gs://$PROJECT_ID-output-invoices
-
-gsutil mb -c standard -l $REGION -b on gs://$PROJECT_ID-archived-invoices
+cat output.json | jq -r ".document.text"
 
 
-bq --location=US mk  -d \
- --description "Form Parser Results" \
- ${PROJECT_ID}:invoice_parser_results
- 
-cd ~/document-ai-challenge/scripts/table-schema
+gsutil cp gs://cloud-training/gsp924/synchronous_doc_ai.py .
 
-bq mk --table \
-invoice_parser_results.doc_ai_extracted_entities \
-doc_ai_extracted_entities.json
-
-
-cd ~/document-ai-challenge/scripts
-
-PROJECT_ID=$(gcloud config get-value project)
-PROJECT_NUMBER=$(gcloud projects list --filter="project_id:$PROJECT_ID" --format='value(project_number)')
-
-SERVICE_ACCOUNT=$(gcloud storage service-agent --project=$PROJECT_ID)
-
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member serviceAccount:$SERVICE_ACCOUNT \
-  --role roles/pubsub.publisher
-
-
-export CLOUD_FUNCTION_LOCATION=$REGION
-
-echo $CLOUD_FUNCTION_LOCATION
-
-sleep 30
-
-#!/bin/bash
-
-deploy_function() {
-  gcloud functions deploy process-invoices \
-  --gen2 \
-  --region=${CLOUD_FUNCTION_LOCATION} \
-  --entry-point=process_invoice \
-  --runtime=python313 \
-  --service-account=${PROJECT_ID}@appspot.gserviceaccount.com \
-  --source=cloud-functions/process-invoices \
-  --timeout=400 \
-  --env-vars-file=cloud-functions/process-invoices/.env.yaml \
-  --trigger-resource=gs://${PROJECT_ID}-input-invoices \
-  --trigger-event=google.storage.object.finalize \
-  --service-account $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
-  --allow-unauthenticated
-}
-
-deploy_success=false
-
-while [ "$deploy_success" = false ]; do
-  if deploy_function; then
-    echo "Function deployed successfully.."
-  deploy_success=true
-  else
-    echo "Deployment Retrying"
-    sleep 10
-  fi
-done
-
-
-PROCESSOR_ID=$(curl -X GET \
-  -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
-  -H "Content-Type: application/json" \
-  "https://documentai.googleapis.com/v1/projects/$PROJECT_ID/locations/us/processors" | \
-  grep '"name":' | \
-  sed -E 's/.*"name": "projects\/[0-9]+\/locations\/us\/processors\/([^"]+)".*/\1/')
-
-
-export PROCESSOR_ID
-echo $PROCESSOR_ID
-
-export CLOUD_FUNCTION_LOCATION=$REGION
-echo $CLOUD_FUNCTION_LOCATION
+python3 -m pip install --upgrade google-cloud-documentai google-cloud-storage prettytable
 
 export PROJECT_ID=$(gcloud config get-value core/project)
-echo $PROJECT_ID
+export GOOGLE_APPLICATION_CREDENTIALS="$PWD/key.json"
 
-gcloud functions deploy process-invoices \
-  --gen2 \
-  --region=${CLOUD_FUNCTION_LOCATION} \
-  --entry-point=process_invoice \
-  --runtime=python39 \
-  --service-account=${PROJECT_ID}@appspot.gserviceaccount.com \
-  --source=cloud-functions/process-invoices \
-  --timeout=400 \
-  --trigger-resource=gs://${PROJECT_ID}-input-invoices \
-  --trigger-event=google.storage.object.finalize \
-  --update-env-vars=PROCESSOR_ID=${PROCESSOR_ID},PARSER_LOCATION=us,PROJECT_ID=${PROJECT_ID} \
-  --service-account=$PROJECT_NUMBER-compute@developer.gserviceaccount.com
-
-
-export PROJECT_ID=$(gcloud config get-value core/project)
-gsutil -m cp -r gs://cloud-training/gsp367/* \
-~/document-ai-challenge/invoices gs://${PROJECT_ID}-input-invoices/
+python3 synchronous_doc_ai.py \
+--project_id=$PROJECT_ID \
+--processor_id=$PROCESSOR_ID \
+--location=us \
+--file_name=health-intake-form.pdf | tee results.txt
