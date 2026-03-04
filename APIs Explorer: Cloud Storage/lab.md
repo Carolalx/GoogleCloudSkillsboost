@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/APIs%20Explorer%3A%20Cloud%20Storage/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
