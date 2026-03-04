@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/IAM%20Custom%20Roles/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
