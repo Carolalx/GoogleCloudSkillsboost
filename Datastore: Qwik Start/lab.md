@@ -12,7 +12,8 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso!
+5 - Tecle `y` e `Enter`   
+6 - Verifique seu Progresso!
 
 ---
 
