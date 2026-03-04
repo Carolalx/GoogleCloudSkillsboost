@@ -7,12 +7,12 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Transacting%20Digital%20Assets%20with%20Multi-Party%20Computation%20and%20Confidential%20Space/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso! (pode demorar um pouco)
+5 - Verifique seu Progresso! 
 
 ---
 
