@@ -8,7 +8,9 @@
 
 ```
 curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Analyze%20data%20with%20Gemini%20assistance/carolalx.sh
+
 sudo chmod +x carolalx.sh
+
 ./carolalx.sh
 ```
 
