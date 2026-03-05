@@ -19,7 +19,7 @@ sudo chmod +x carolalx1.sh
 ./carolalx1.sh
 ```
 
-9 - Verifique seu Progresso! (pode demorar um pouco)
+6 - Verifique seu Progresso! (pode demorar um pouco)
 
 ---
 
