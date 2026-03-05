@@ -26,9 +26,6 @@ echo "${CYAN}${BOLD}╔═══════════════════
 echo "${CYAN}${BOLD}                    Initialing execution!                 ${RESET}"
 echo "${CYAN}${BOLD}╚════════════════════════════════════════════════════════╝${RESET}"
 echo
-echo "${GREEN}${BOLD}Please like, share and subscribe to the channel for more:${RESET}"
-echo "${BLUE}${BOLD}https://www.youtube.com/@drabhishek.5460/videos${RESET}"
-echo
 
 echo "${YELLOW}${BOLD}Starting Terraform Instance Creation Lab...${RESET}"
 
