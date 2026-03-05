@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Implement%20CICD%20Pipelines%20on%20Google%20Cloud%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
