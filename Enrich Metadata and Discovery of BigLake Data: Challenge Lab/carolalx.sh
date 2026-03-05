@@ -19,7 +19,6 @@ REVERSE_TEXT=$'\033[7m'
 
 clear
 
-# Welcome message - Updated for Dr. Abhishek
 echo "${CYAN_TEXT}${BOLD_TEXT}===========================================================${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}                  INITIATING EXECUTION...                  ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}===========================================================${RESET_FORMAT}"
@@ -81,7 +80,7 @@ ENTRY_NAME=$(gcloud data-catalog entries lookup '//bigquery.googleapis.com/proje
 gcloud data-catalog tags create --entry=${ENTRY_NAME} \
     --tag-template=sensitive_data_template --tag-template-location=$REGION --tag-file=tag_file.json
 
-# Final message - Updated for Dr. Abhishek
+
 echo
 echo "${CYAN_TEXT}${BOLD_TEXT}=====================================================${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}          LABORATÓRIO CONCLUÍDO COM SUCESSO!         ${RESET_FORMAT}"
