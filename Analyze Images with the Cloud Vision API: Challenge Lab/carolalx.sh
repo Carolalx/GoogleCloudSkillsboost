@@ -28,9 +28,6 @@ echo "${BLUE}${BOLD}============================================${RESET}"
 echo "${BLUE}${BOLD}          STARTING THE EXECUTION...         ${RESET}"
 echo "${BLUE}${BOLD}============================================${RESET}"
 echo ""
-echo "${CYAN}${BOLD}⚡ Expertly crafted by Dr. Abhishek Cloud${RESET}"
-echo "${YELLOW}${BOLD}📺 YouTube: ${UNDERLINE}https://www.youtube.com/@DrAbhishekCloud${RESET}"
-echo ""
 
 # ======================
 #  API KEY CREATION
