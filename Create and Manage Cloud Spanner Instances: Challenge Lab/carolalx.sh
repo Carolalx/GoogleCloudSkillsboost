@@ -31,7 +31,7 @@ echo
 echo "${YELLOW_TEXT}${BOLD_TEXT}Creating Spanner instance: banking-ops-instance${RESET_FORMAT}"
 gcloud spanner instances create banking-ops-instance \
   --config=regional-$REGION \
-  --description="TechCode" \
+  --description="carolalx" \
   --nodes=1
 
 # Create database
