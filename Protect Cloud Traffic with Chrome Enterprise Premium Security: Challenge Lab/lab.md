@@ -12,7 +12,15 @@ sudo chmod +x carolalx.sh
 
 ```
 
-5 - Verifique seu progresso..   
+5 - Acesse o 1º link disponibilizado no fim da execução > `Get Start`   
+6 - Dê o nome do app de `carolalx`, selecione seu `student` em user support email > `Next`
+7 - Audience, elecione `Internal` > `Next`
+8 - em Contact Information, copie o contact disponibilizado no terminal > `Next`    
+9 - Selecione `I agree.....` > `Finish` > `Create`
+
+10 - Abra o segundo link , Marque a caixa de seleção de App Engine app e marque `ON` no IAP > `Turn On`   
+11 - `Add Pincipal` > Cole o Test User informado em seu lab > Role `IAP-secured Web App User` > `Save`      
+12 - Verifique seu progresso..   
 
 ---
 🎉 Parabéns! Lab Concluído! 🏆
