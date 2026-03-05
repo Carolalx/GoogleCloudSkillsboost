@@ -11,7 +11,7 @@ sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - 
+5 - Processo -> https://www.youtube.com/watch?v=X8wVZK87nao ##BEM COMPLEXO SEM VIDEO!!
 
 ```
 curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Continuous%20Delivery%20with%20Jenkins%20in%20Kubernetes%20Engine/carolalx1.sh
