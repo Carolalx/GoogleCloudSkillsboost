@@ -3,7 +3,6 @@
 1 - Substitua `PROJECT_ID` e `LOCATION` pelas informações fornecidas em seu lab e execute no terminal:   
 
 ```python
-
 import vertexai
 import urllib.request
 from vertexai.generative_models import GenerativeModel, Part
