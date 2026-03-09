@@ -6,16 +6,16 @@
 4 - Execute o código abaixo no terminal
 
 ```bash
-curl -LO 
-sudo chmod +x 
-./
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20and%20Manage%20AlloyDB%20Instances%3A%20Challenge%20Lab/carolalx.sh
+sudo chmod +x carolalx.sh
+./carolalx.sh
 ```
+
+👉 Vá para `AlloyDB Clusters`  [Clique aqui](https://console.cloud.google.com/alloydb/clusters?)
 
 ```bash
 export ALLOYDB=
 ```
-
-👉 Vá para `AlloyDB Clusters`  [Clique aqui](https://console.cloud.google.com/alloydb/clusters?)
 
 ```bash
 echo $ALLOYDB  > alloydbip.txt
@@ -81,8 +81,6 @@ INSERT INTO departments VALUES (50, 'Shipping', 121, 1500);
 INSERT INTO departments VALUES (60, 'IT', 103, 1400);
 ```
 
-</div>
-
 ---
 
-## 🎉 **Congratulations! Lab Completed Successfully!** 🏆  
+## 🎉 **Parabéns! Lab Concluído com Sucesso!** 🏆  
