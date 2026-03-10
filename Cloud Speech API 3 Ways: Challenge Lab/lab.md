@@ -11,9 +11,9 @@ gcloud compute ssh lab-vm --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
 ```
 
 ```bash
-curl -LO 
-sudo chmod +x TechCode.sh 
-./TechCode.sh
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Cloud%20Speech%20API%203%20Ways%3A%20Challenge%20Lab/carolalx.sh
+sudo chmod +x carolalx.sh 
+./carolalx.sh
 ```
 
 
