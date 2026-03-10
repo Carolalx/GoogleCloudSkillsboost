@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Dataprep%3A%20Qwik%20Start/carolalx.sh
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Dataprep%3A%20Qwik%20Start/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
@@ -15,7 +15,7 @@ sudo chmod +x carolalx.sh
 5 - Abra o link `https://console.cloud.google.com/projectselector2/dataprep?supportedpurview=project`     
 7 - Marque `By checking this box....` > Clique em `Agree and Continue`   
 8 - Selecione seu `student .... ` (conta do lab) > `Continue` > `Allow`   
-9 - Marque `By checking this box....` > Clique em `Acept` > `Continue`
+9 - Marque `By checking this box....` > Clique em `Acept` > `Continue`   
 10 - Verifique seu Progresso!
 
 ---
