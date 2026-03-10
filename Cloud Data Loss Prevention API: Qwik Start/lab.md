@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Cloud%20Data%20Loss%20Prevention%20API%3A%20Qwik%20Start/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
