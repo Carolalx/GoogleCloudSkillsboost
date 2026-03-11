@@ -11,8 +11,9 @@ curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
-5 - Digite `Y` quando for solicitado e pressione `Enter`   
-6 - Verifique seu Progresso! (pode levar alguns segundos)
+5 - Quando for solicitado e pressione Y/n, verifique seu progresso até a penultuma Task   
+6 - Depois digite `Y` e tecle `Enter`   
+7 - Verifique seu Progresso! (pode levar alguns segundos)
 
 ---
 
