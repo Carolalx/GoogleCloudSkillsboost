@@ -6,12 +6,17 @@
 4 - Execute o código abaixo no terminal   
 
 ```
+export TOPIC=
+export MESSAGE=""
+```
+
+```
 curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Create%20a%20Streaming%20Data%20Lake%20on%20Cloud%20Storage%3A%20Challenge%20Lab/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
 
-5 - Verifique seu Progresso! (pode demorar um pouco)
+5 - Verifique seu Progresso! 
 
 ---
 
