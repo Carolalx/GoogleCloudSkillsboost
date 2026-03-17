@@ -1,76 +1,62 @@
+export ZONE=$(gcloud compute project-info describe \
+--format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 
+export REGION=$(echo "$ZONE" | cut -d '-' -f 1-2)
 
-echo ""
-echo ""
-echo "Please export the values."
-
-
-# Prompt user to input three regions
-read -p "Enter TOPIC_ID: " TOPIC_ID
-read -p "Enter MESSAGE: " MESSAGE
-read -p "Enter REGION: " REGION
-
-PROJECT_ID=$(gcloud config get-value project)
-
-export BUCKET_NAME="${PROJECT_ID}-bucket"
-
+gcloud config set compute/region $REGION
 
 gcloud services disable dataflow.googleapis.com
+gcloud services enable \
+dataflow.googleapis.com \
+cloudscheduler.googleapis.com
 
-gcloud services enable dataflow.googleapis.com
-gcloud services enable cloudscheduler.googleapis.com
+sleep 30
 
-gsutil mb gs://$BUCKET_NAME
+PROJECT_ID=$(gcloud config get-value project)
+BUCKET="${PROJECT_ID}-bucket"
 
-gcloud pubsub topics create $TOPIC_ID
+gsutil mb gs://$BUCKET
 
-gcloud app create --region=$REGION
+gcloud pubsub topics create $TOPIC
 
-sleep 100
+# Set the App Engine region variable
+if [ "$REGION" == "us-central1" ]; then
+  gcloud app create --region us-central
+elif [ "$REGION" == "europe-west1" ]; then
+  gcloud app create --region europe-west
+else
+  gcloud app create --region "$REGION"
+fi
 
-gcloud scheduler jobs create pubsub quicklab --schedule="* * * * *" \
-    --topic=$TOPIC_ID --message-body="$MESSAGE"
+gcloud scheduler jobs create pubsub publisher-job --schedule="* * * * *" \
+    --topic=$TOPIC --message-body="$MESSAGE"
 
-sleep 20
+while true; do
+    if gcloud scheduler jobs run publisher-job --location="$REGION"; then
+        echo "Command executed successfully. Now running next command.."
+        break 
+    else
+        echo "Retrying please wait..."
+        sleep 10 
+    fi
+done
 
-gcloud scheduler jobs run quicklab
-
-
-cat > run_pubsub_to_gcs_quicklab.sh <<EOF_CP
+cat > shell.sh <<EOF_CP
 #!/bin/bash
-
-# Set environment variables
-export PROJECT_ID=$PROJECT_ID
-export REGION=$REGION
-export TOPIC_ID=$TOPIC_ID
-export BUCKET_NAME=$BUCKET_NAME
-
-# Clone the repository and navigate to the required directory
 git clone https://github.com/GoogleCloudPlatform/python-docs-samples.git
 cd python-docs-samples/pubsub/streaming-analytics
-
-# Install dependencies
 pip install -U -r requirements.txt
-
-# Run the Python script with parameters
 python PubSubToGCS.py \
-  --project=$PROJECT_ID \
-  --region=$REGION \
-  --input_topic=projects/$PROJECT_ID/topics/$TOPIC_ID \
-  --output_path=gs://$BUCKET_NAME/samples/output \
-  --runner=DataflowRunner \
-  --window_size=2 \
-  --num_shards=2 \
-  --temp_location=gs://$BUCKET_NAME/temp
+--project=$PROJECT_ID \
+--region=$REGION \
+--input_topic=projects/$PROJECT_ID/topics/$TOPIC \
+--output_path=gs://$BUCKET/samples/output \
+--runner=DataflowRunner \
+--window_size=2 \
+--num_shards=2 \
+--temp_location=gs://$BUCKET_NAME/temp
 EOF_CP
 
-chmod +x run_pubsub_to_gcs_quicklab.sh
+chmod +x shell.sh
 
-gcloud scheduler jobs run quicklab
-
-
-docker run -it \
-  -e DEVSHELL_PROJECT_ID=$DEVSHELL_PROJECT_ID \
-  -v "$(pwd)/run_pubsub_to_gcs_quicklab.sh:/run_pubsub_to_gcs_quicklab.sh" \
-  python:3.7 \
-  /bin/bash -c "/run_pubsub_to_gcs_quicklab.sh"
+docker run -it -e DEVSHELL_PROJECT_ID=$DEVSHELL_PROJECT_ID -e BUCKET_NAME=$BUCKET -e PROJECT_ID=$PROJECT_ID -e REGION=$REGION -e TOPIC=$TOPIC -v $(pwd)/shell.sh:/shell.sh python:3.7 /bin/bash -c "/shell.sh"
