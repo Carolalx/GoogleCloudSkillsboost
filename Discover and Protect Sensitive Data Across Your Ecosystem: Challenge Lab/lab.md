@@ -7,15 +7,15 @@
 ## **Sensitive Data Protection** 👉Click [here](https://console.cloud.google.com/security/sensitive-data-protection/create/discoveryConfiguration;source=DATA_PROFILE_COVERAGE_DASHBOARD;discoveryType=4?project=)
 ## ☁️ Run in Cloud Shell:
 ```bash
-curl -LO raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Discover%20and%20Protect%20Sensitive%20Data%20Across%20Your%20Ecosystem%3A%20Challenge%20Lab/TechCode.sh
-sudo chmod +x TechCode.sh 
-./TechCode.sh
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Discover%20and%20Protect%20Sensitive%20Data%20Across%20Your%20Ecosystem%3A%20Challenge%20Lab/carolalx.sh
+sudo chmod +x carolalx.sh 
+./carolalx.sh
 ```
 ## 🚀 Run in Notebook Terminal:
 ```bash
 rm deidentify-model-response-challenge-lab-v1.0.0.ipynb
 
-curl -LO https://raw.githubusercontent.com/prateekrajput08/Arcade-Google-Cloud-Labs/refs/heads/main/Discover%20and%20Protect%20Sensitive%20Data%20Across%20Your%20Ecosystem%3A%20Challenge%20Lab/deidentify-model-response-challenge-lab-v1.0.0.ipynb
+curl -LO https://raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Discover%20and%20Protect%20Sensitive%20Data%20Across%20Your%20Ecosystem%3A%20Challenge%20Lab/deidentify-model-response-challenge-lab-v1.0.0.ipynb
 ```
 
 </div>
