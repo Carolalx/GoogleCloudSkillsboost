@@ -7,7 +7,13 @@
 
 ```
 export REGION_1=
+```
+
+```
 export REGION_2=
+```
+
+```
 export REGION_3=
 ```
 
