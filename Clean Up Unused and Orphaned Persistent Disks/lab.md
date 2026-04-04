@@ -7,7 +7,7 @@
 
 
 ```
-curl -LO 
+curl -LO raw.githubusercontent.com/Carolalx/GoogleCloudSkillsboost/refs/heads/main/Clean%20Up%20Unused%20and%20Orphaned%20Persistent%20Disks/carolalx.sh
 sudo chmod +x carolalx.sh
 ./carolalx.sh
 ```
